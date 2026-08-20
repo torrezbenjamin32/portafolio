@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Benjamín Torres · Electromecánica</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- Google Fonts: Playfair Display (serif) + Inter (sans) -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ---------- RESET GLOBAL ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            display: flex;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* ---------- PANEL IZQUIERDO (fijo) ---------- */
+        .left-panel {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 38%;
+            padding: 50px 40px 40px 60px;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-right: 1px solid #e2e8f0;
+        }
+
+        .left-panel .name {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.1;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .left-panel .name span {
+            color: #2563eb;
+        }
+
+        .left-panel .badge {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 30px;
+            border-left: 4px solid #2563eb;
+            padding-left: 16px;
+        }
+
+        .left-panel .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .left-panel .nav-links a {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #64748b;
+            transition: color 0.2s, padding-left 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .left-panel .nav-links a i {
+            width: 20px;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .left-panel .nav-links a:hover,
+        .left-panel .nav-links a.active {
+            color: #2563eb;
+        }
+
+        .left-panel .nav-links a:hover i,
+        .left-panel .nav-links a.active i {
+            color: #2563eb;
+        }
+
+        .left-panel .nav-links a.active {
+            font-weight: 500;
+            padding-left: 6px;
+            border-left: 3px solid #2563eb;
+        }
+
+        .left-panel .social {
+            display: flex;
+            gap: 18px;
+            margin-top: 10px;
+        }
+
+        .left-panel .social a {
+            color: #94a3b8;
+            font-size: 1.3rem;
+            transition: color 0.2s;
+        }
+
+        .left-panel .social a:hover {
+            color: #2563eb;
+        }
+
+        .left-panel .footer-text {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #cbd5e1;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 20px;
+        }
+
+        /* ---------- PANEL DERECHO (contenido) ---------- */
+        .right-panel {
+            width: 62%;
+            padding: 60px 60px 80px 50px;
+        }
+
+        /* ---------- SECCIONES ---------- */
+        section {
+            margin-bottom: 80px;
+            scroll-margin-top: 30px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+
+        .section-title span {
+            color: #2563eb;
+        }
+
+        .section-sub {
+            font-size: 0.95rem;
+            color: #64748b;
+            font-weight: 300;
+            margin-bottom: 35px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 12px;
+        }
+
+        /* ---------- HOME (dentro del panel derecho) ---------- */
+        #home {
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #home .hero-intro {
+            font-size: 1rem;
+            color: #2563eb;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        #home .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #0f172a;
+        }
+
+        #home .hero-title span {
+            color: #2563eb;
+        }
+
+        #home .hero-desc {
+            max-width: 500px;
+            font-size: 1.05rem;
+            color: #475569;
+            margin: 20px 0 30px;
+        }
+
+        .btn-outline {
+            display: inline-block;
+            padding: 12px 32px;
+            border: 2px solid #2563eb;
+            color: #2563eb;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border-radius: 40px;
+            transition: background 0.2s, color 0.2s;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-outline:hover {
+            background: #2563eb;
+            color: #ffffff;
+        }
+
+        /* ---------- ABOUT ---------- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .about-grid p {
+            color: #334155;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            text-align: justify;
+        }
+
+        .about-grid .highlight {
+            color: #2563eb;
+            font-weight: 500;
+        }
+
+        /* ---------- SKILLS ---------- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+        }
+
+        .skill-card {
+            background: #ffffff;
+            padding: 20px 20px 25px;
+            border-radius: 8px;
+            border-left: 4px solid #2563eb;
+            transition: background 0.15s;
+        }
+
+        .skill-card:hover {
+            background: #f1f5f9;
+        }
+
+        .skill-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 2px;
+        }
+
+        .skill-card .level {
+            color: #64748b;
+            font-size: 0.8rem;
+            font-weight: 400;
+        }
+
+        .skill-bar {
+            margin-top: 12px;
+            width: 100%;
+            height: 5px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-bar .fill {
+            height: 100%;
+            background: #2563eb;
+            border-radius: 4px;
+        }
+
+        /* ---------- SERVICES ---------- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+        }
+
+        .service-item {
+            background: #ffffff;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            transition: border 0.2s, background 0.2s;
+        }
+
+        .service-item:hover {
+            border-color: #2563eb;
+            background: #f8fafc;
+        }
+
+        .service-item i {
+            font-size: 2rem;
+            color: #2563eb;
+            margin-bottom: 15px;
+        }
+
+        .service-item h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+
+        .service-item p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* ---------- PORTFOLIO (PROYECTO CHASIS) ---------- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            transition: border 0.2s;
+        }
+
+        .project-card:hover {
+            border-color: #2563eb;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            background: #f1f5f9;
+            display: block;
+        }
+
+        .project-card .info {
+            padding: 18px 20px 22px;
+        }
+
+        .project-card .info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .project-card .info .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 8px 0 12px;
+        }
+
+        .project-card .info .tags span {
+            background: #f1f5f9;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #475569;
+            letter-spacing: 0.3px;
+        }
+
+        .project-card .info p {
+            color: #475569;
+            font-size: 0.9rem;
+            text-align: justify;
+            margin-bottom: 6px;
+        }
+
+        .project-card .info p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ---------- CONTACT ---------- */
+        .contact-box {
+            background: #ffffff;
+            padding: 35px 40px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            max-width: 550px;
+        }
+
+        .contact-box p {
+            color: #475569;
+            font-size: 1rem;
+            margin-bottom: 18px;
+        }
+
+        .contact-box .email {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #2563eb;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .contact-box .email i {
+            font-size: 1.1rem;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 1024px) {
+            .left-panel {
+                width: 32%;
+                padding: 40px 25px 30px 35px;
+            }
+            .left-panel .name {
+                font-size: 2.6rem;
+            }
+            .right-panel {
+                width: 68%;
+                padding: 40px 35px 60px 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .left-panel {
+                position: relative;
+                height: auto;
+                width: 100%;
+                padding: 30px 25px 20px;
+                border-right: none;
+                border-bottom: 1px solid #e2e8f0;
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 10px;
+            }
+            .left-panel .name {
+                font-size: 2rem;
+                flex: 1;
+            }
+            .left-panel .badge {
+                font-size: 1rem;
+                margin-bottom: 0;
+                border-left: none;
+                padding-left: 0;
+                width: 100%;
+                order: 3;
+            }
+            .left-panel .nav-links {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 12px;
+                margin-bottom: 0;
+                order: 4;
+                width: 100%;
+                padding-top: 10px;
+                border-top: 1px solid #f1f5f9;
+            }
+            .left-panel .nav-links a {
+                font-size: 0.85rem;
+            }
+            .left-panel .social {
+                margin-top: 0;
+            }
+            .left-panel .footer-text {
+                display: none;
+            }
+
+            .right-panel {
+                width: 100%;
+                padding: 30px 20px 50px;
+            }
+
+            #home .hero-title {
+                font-size: 2.2rem;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-box {
+                padding: 25px;
+            }
+            #home {
+                min-height: auto;
+                padding: 20px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .left-panel .name {
+                font-size: 1.6rem;
+            }
+            .left-panel .badge {
+                font-size: 0.85rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== PANEL IZQUIERDO (fijo) ==================== -->
+    <aside class="left-panel">
+        <div class="name">Benjamín <span>Torres</span></div>
+        <div class="badge">Electromecánica · Desafío Eco 2026</div>
+
+        <nav class="nav-links">
+            <a href="#home" class="active"><i class="fas fa-home"></i> Inicio</a>
+            <a href="#about"><i class="fas fa-user"></i> Sobre mí</a>
+            <a href="#skills"><i class="fas fa-cog"></i> Habilidades</a>
+            <a href="#services"><i class="fas fa-briefcase"></i> Servicios</a>
+            <a href="#portfolio"><i class="fas fa-project-diagram"></i> Proyecto</a>
+            <a href="#contact"><i class="fas fa-envelope"></i> Contacto</a>
+        </nav>
+
+        <div class="social">
+            <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+        <div class="footer-text">© 2025 · Instituto Madero</div>
+    </aside>
+
+    <!-- ==================== PANEL DERECHO (contenido) ==================== -->
+    <main class="right-panel">
+
+        <!-- HOME -->
+        <section id="home">
+            <div class="hero-intro">Estudiante de electromecánica</div>
+            <div class="hero-title">
+                Construyendo el <span>futuro</span> de la movilidad
+            </div>
+            <div class="hero-desc">
+                Apasionado por el diseño mecánico, la soldadura y los sistemas eléctricos. 
+                Actualmente liderando la construcción del chasis para el Desafío Eco 2026.
+            </div>
+            <a href="#contact" class="btn-outline">Conectemos</a>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="about">
+            <h2 class="section-title">Sobre <span>mí</span></h2>
+            <div class="section-sub">— Quién soy y qué me mueve —</div>
+            <div class="about-grid">
+                <div>
+                    <p>
+                        Soy <span class="highlight">Benjamín Torres</span>, tengo 18 años y estoy cursando 
+                        el último año de la especialización en <span class="highlight">electromecánica</span> 
+                        en el Instituto Madero. Desde chico me fascinó entender cómo funcionan las máquinas 
+                        y los vehículos, y esa curiosidad me llevó al taller.
+                    </p>
+                    <p>
+                        Soy una persona <span class="highlight">práctica y meticulosa</span>. Disfruto 
+                        el trabajo manual, la soldadura, el armado de estructuras y la resolución de 
+                        problemas en el momento. La precisión y la seguridad son mis prioridades en cada proyecto.
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        Actualmente, estoy a cargo de la <span class="highlight">construcción del chasis</span> 
+                        para el vehículo eléctrico del <span class="highlight">Desafío Eco 2026</span>, 
+                        una competencia que pone a prueba nuestros conocimientos de mecánica, materiales 
+                        y trabajo en equipo.
+                    </p>
+                    <p>
+                        Mi objetivo es seguir desarrollándome en el área de <span class="highlight">movilidad sostenible</span> 
+                        y contribuir a proyectos que combinen la ingeniería mecánica con la eficiencia energética.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills">
+            <h2 class="section-title">Habilidades <span>técnicas</span></h2>
+            <div class="section-sub">— Lo que domino —</div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>Soldadura y fabricación metálica</h3>
+                    <div class="level">Avanzado</div>
+                    <div class="skill-bar"><div class="fill" style="width: 90%;"></div></div>
+                </div>
+                <div class="skill-card">
+                    <h3>Diseño mecánico (CAD)</h3>
+                    <div class="level">Intermedio</div>
+                    <div class="skill-bar"><div class="fill" style="width: 75%;"></div></div>
+                </div>
+                <div class="skill-card">
+                    <h3>Instalaciones eléctricas y motores</h3>
+                    <div class="level">Intermedio</div>
+                    <div class="skill-bar"><div class="fill" style="width: 70%;"></div></div>
+                </div>
+                <div class="skill-card">
+                    <h3>Herramientas de taller y medición</h3>
+                    <div class="level">Avanzado</div>
+                    <div class="skill-bar"><div class="fill" style="width: 85%;"></div></div>
+                </div>
+                <div class="skill-card">
+                    <h3>Control dimensional y geometría</h3>
+                    <div class="level">Intermedio</div>
+                    <div class="skill-bar"><div class="fill" style="width: 70%;"></div></div>
+                </div>
+                <div class="skill-card">
+                    <h3>Trabajo en equipo y coordinación</h3>
+                    <div class="level">Proactivo</div>
+                    <div class="skill-bar"><div class="fill" style="width: 85%;"></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section id="services">
+            <h2 class="section-title">Qué <span>ofrezco</span></h2>
+            <div class="section-sub">— Servicios —</div>
+            <div class="services-grid">
+                <div class="service-item">
+                    <i class="fas fa-wrench"></i>
+                    <h3>Prototipado mecánico</h3>
+                    <p>Diseño y fabricación de estructuras, chasis y ensambles metálicos.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Instalación eléctrica</h3>
+                    <p>Cableado, control de motores e integración de baterías.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-tools"></i>
+                    <h3>Asesoría en taller</h3>
+                    <p>Corte, soldadura y armado con precisión y seguridad.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PORTFOLIO (PROYECTO CHASIS) -->
+        <section id="portfolio">
+            <h2 class="section-title">Proyecto <span>chasis</span></h2>
+            <div class="section-sub">Desafío Eco 2026 · Instituto Madero</div>
+
+            <div class="project-grid">
+                <!-- Etapa 1: Diseño y corte (imagen 1) -->
+                <div class="project-card">
+                    <img src="img/1.jpg" alt="Diseño y corte del chasis" />
+                    <div class="info">
+                        <h3>1. Diseño y corte</h3>
+                        <div class="tags">
+                            <span>Caños de acero</span>
+                            <span>Medición</span>
+                            <span>Reglamento</span>
+                        </div>
+                        <p>
+                            Diseñamos el chasis y cortamos los tubos estructurales siguiendo las 
+                            normas de seguridad. Usamos nivel, escuadra y cinta métrica para asegurar 
+                            la simetría desde el principio.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Etapa 2: Soldadura (imagen 2) -->
+                <div class="project-card">
+                    <img src="img/2.jpg" alt="Soldadura del chasis" />
+                    <div class="info">
+                        <h3>2. Soldadura y montaje</h3>
+                        <div class="tags">
+                            <span>Soldadura MIG</span>
+                            <span>Arcos de seguridad</span>
+                            <span>Asiento</span>
+                        </div>
+                        <p>
+                            Soldamos la estructura principal y los arcos de seguridad. Montamos el asiento 
+                            tipo butaca y las 4 ruedas para verificar la estabilidad y geometría del vehículo.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Etapa 3: Estado actual (imagen 3) -->
+                <div class="project-card">
+                    <img src="img/3.jpg" alt="Chasis armado" />
+                    <div class="info">
+                        <h3>3. Estado actual</h3>
+                        <div class="tags">
+                            <span>Motor eléctrico</span>
+                            <span>Baterías</span>
+                            <span>Tracción</span>
+                        </div>
+                        <p>
+                            El chasis está soldado y armado sobre sus ruedas. El próximo paso es la 
+                            instalación del sistema eléctrico, motor y baterías, seguido de la carrocería 
+                            y las pruebas finales.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact">
+            <h2 class="section-title">Contacto</h2>
+            <div class="section-sub">— Hablemos —</div>
+            <div class="contact-box">
+                <p>
+                    📩 Si querés colaborar, tenés alguna consulta sobre el proyecto o simplemente 
+                    querés charlar de mecánica y vehículos eléctricos, escribime.
+                </p>
+                <a href="mailto:btorres@institutomadero.edu.ar" class="email">
+                    <i class="fas fa-envelope"></i> btorres@institutomadero.edu.ar
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+        const links = document.querySelectorAll('.left-panel .nav-links a');
+        const sections = document.querySelectorAll('section');
+
+        // Resaltar enlace activo al hacer scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            links.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Scroll suave al hacer clic
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
